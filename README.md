@@ -25,12 +25,15 @@ sudo -u postgres psql <<'SQL'
 CREATE ROLE admin LOGIN PASSWORD 'root' SUPERUSER;
 CREATE DATABASE pabd OWNER admin;
 SQL
+
+
 ```
 
 `<<'SQL' ... SQL` -> Heredoc: passa várias linhas SQL como entrada para o psql
 
 # 5. Conectar com o novo usuário
 ```bash
+sudo service postgresql start
 psql -h 127.0.0.1 -p 5432 -U admin -d pabd
 ```
 

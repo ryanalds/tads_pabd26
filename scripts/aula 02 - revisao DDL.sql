@@ -12,7 +12,7 @@ create table funcionarios (
     data_nasc date,
     sexo char(1),
     cpf_surpervisor char(11),
-    numero_departamento smallint not null,
+    numero_departamento smallint,
 
     constraint funcionario_salrio_check
     check (salario >= 2000 and salario <= 15000)
@@ -62,10 +62,25 @@ alter table funcionarios
 drop constraint if exists funcionarios_sexo_check;
 
 -- Adicionar restrição FOREING KEY
+-- alter table funcionarios
+-- add  constraint funcionarios_num_dep_fk
+-- foreign key (numero_departamento)
+-- references departamentos(numero)
+-- -- set null, no action, cascade, set default, restrict
+-- on delete no action
+-- on update cascade;
+
+--
 alter table funcionarios
-add  constraint funcionarios_num_dep_fk
-foreign key (numero_departamento)
-references departamentos(numero)
--- set null, no action, cascade, set default, restrict
-on delete no action
+add constraint funcionarios_cpf_supervisor_fk
+foreign key (cpf_surpervisor)
+references funcionarios(cpf)
+on delete set null
+on update cascade;
+
+alter table departamentos
+add constraint departamentos_cpf_gerente_fk
+foreign key (cpf_gerente)  
+references funcionarios(cpf)
+on delete set null
 on update cascade;
