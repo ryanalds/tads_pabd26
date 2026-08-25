@@ -1,50 +1,50 @@
-select * from funcionario;
+select * from funcionarios;
 
-select pnome, unome, numero_departamento from funcionario;
+select pnome, unome, numero_departamento from funcionarios;
 
-select pnome || ' ' || unome, numero_departamento from funcionario;
+select pnome || ' ' || unome, numero_departamento from funcionarios;
 
 -- alias
-select pnome || ' ' || unome as "Nome Completo", numero_departamento as "Dep" from funcionario;
-select pnome || ' ' || unome nome, numero_departamento dep from funcionario;
+select pnome || ' ' || unome as "Nome Completo", numero_departamento as "Dep" from funcionarios;
+select pnome || ' ' || unome nome, numero_departamento dep from funcionarios;
 
-select all numero_departamento from funcionario;
+select all numero_departamento from funcionarios;
 -- Exibir valores distintos
-select distinct numero_departamento from funcionario;
+select distinct numero_departamento from funcionarios;
 
 -- round: especifica casas decimais. só aceita NUMERIC
-select pnome || ' ' || unome nome, salario, round(salario*0.11, 2) inss from funcionario;
+select pnome || ' ' || unome nome, salario, round(salario*0.11, 2) inss from funcionarios;
 
 -- WHERE: filtro
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where endereco='Natal-RN';
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where numero_departamento=1 and salario>9000;
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where salario>=8000 and salario<=10000;
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where salario between 8000 and 10000;
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where salario not between 8000 and 10000;
 
 -- %: substitui qualquer cadeia textual
 -- _: substitui qualquer caractere
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where endereco like '%PI';
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where pnome like '%ana%';
 
 -- ilike: comparação desconsiderando case sensitive
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where endereco ilike '%pi';
 
-select cpf, pnome, unome from funcionario
+select cpf, pnome, unome from funcionarios
 where endereco like '%R_';
 
 -- tabela t: para exemplo de busca de caracteres especiais
@@ -58,3 +58,6 @@ SELECT message FROM t;
 
 select * from t
 where message like '%10$%%' escape '$';
+
+select pnome, unome from funcionarios
+order by pnome, unome;
