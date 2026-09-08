@@ -25,16 +25,13 @@ sudo -u postgres psql <<'SQL'
 CREATE ROLE admin LOGIN PASSWORD 'root' SUPERUSER;
 CREATE DATABASE pabd OWNER admin;
 SQL
-
-
 ```
 
 `<<'SQL' ... SQL` -> Heredoc: passa várias linhas SQL como entrada para o psql
 
 # 5. Conectar com o novo usuário
 ```bash
-sudo service postgresql start
-psql -h 127.0.0.1 -p 5432 -U admin -d pabd
+psql -h 127.0.0.1 -U admin -d pabd
 ```
 
 -h host
@@ -54,3 +51,51 @@ WHERE table_schema = 'public'
   AND table_type = 'BASE TABLE';
 ```
 
+# 7. Comando úteis do psql
+
+Listar todas as tabelas: \dt
+Mostrar a descrição de uma tabela: \d TABELA
+Executar um arquivo: \i PATH
+
+# 8. Usando `pg_restore` para criar o banco de dados `dvdrental`
+
+Faça o donwload no link (https://neon.com/postgresqltutorial/dvdrental.zip). 
+
+Após descompactar, coloque o arquivo `dvdrental.tar` na pasta `utils`.
+
+```bash
+sudo -i -u postgres
+psql
+```
+
+Uma vez dentro do prompt do PostgreSQL, defina uma senha para o usuário `postgres`:
+
+```sql
+ALTER USER postgres PASSWORD 'postgres';
+```
+
+Sair do psql e do sudo. Criar o banco de dados `dvdrental`:
+
+```bash
+psql -h 127.0.0.1 -U postgres
+```
+
+Dentro do psql: 
+
+```sql
+CREATE DATABASE dvdrental;
+```
+
+Sair do psql. Depois, no terminal:
+
+```bash
+pg_restore -h 127.0.0.1 -U postgres -d dvdrental utils/dvdrental.tar 
+```
+
+Para testar, entre no `psql` e digite:
+
+```bash
+\c dvdrental
+```
+
+Para exibir todas as tabelas: `\dt`
