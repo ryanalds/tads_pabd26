@@ -98,4 +98,8 @@ Para testar, entre no `psql` e digite:
 \c dvdrental
 ```
 
+```bash
+psql -h 127.0.0.1 -U postgres -d dvdrental
+```
+
 Para exibir todas as tabelas: `\dt`
